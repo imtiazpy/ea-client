@@ -33,7 +33,6 @@ Object.defineProperty(NextImage, 'default', {
   value: (props) => <OriginalNextImage {...props} unoptimized />,
 });
 
-
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
