@@ -13,6 +13,10 @@ module.exports = {
       lg: '1200px',
       xl: '1536px',
     },
+    fontFamily: {
+      sans: ['Arial', 'sans-serif'],
+      serif: ['Garamond', 'serif'],
+    },
     extend: {
       spacing: {
         1.5: '0.375rem',
