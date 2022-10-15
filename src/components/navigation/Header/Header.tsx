@@ -1,19 +1,21 @@
-import { CustomLink } from '../../Common';
-
 import React from 'react';
+import { useRouter } from 'next/router';
 import { Transition } from '@headlessui/react';
+import { DropDownMenu, CustomLink } from '../../Common';
+import { MenuItems } from './MenuItems';
 
-import { DropDownMenu } from '../../Common';
 
 export interface IHeader extends React.ComponentPropsWithoutRef<'header'> {}
 
 const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
   const [isOpen, setIsOpen] = React.useState(false);
+
+  const router = useRouter()
+
   return (
     <header
       {...headerProps}
-      className={className}
-      //   className={`md:container w-full flex flex-row justify-between ${className}`}
+      className={`${className}`}
     >
       <div>
         <nav className="shadow-sm w-full z-10">
@@ -29,30 +31,16 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                 </div>
                 <div className="hidden md:block">
                   <div className="ml-10 flex items-baseline space-x-4">
-                    <CustomLink
-                      to="/about"
-                      scroll={false}
-                      className="cursor-pointer hover:bg-blue-600 text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                    >
-                      About
-                    </CustomLink>
-
-                    <CustomLink
+                    {MenuItems.map(({name, label}, index) => (
+                      <CustomLink
+                      key={index}
                       to="#"
                       scroll={false}
-                      className="cursor-pointer hover:bg-blue-600 text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                      className={`${router.pathname=='/assessment'? 'text-blue-500' : 'text-black'} cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
                     >
-                      Assessments
+                      {label}
                     </CustomLink>
-
-                    <CustomLink
-                      to="#"
-                      scroll={false}
-                      className="cursor-pointer hover:bg-blue-600 text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                    >
-                      Contact
-                    </CustomLink>
-
+                    ))}
                     <DropDownMenu
                       title="Language"
                       items={['English', 'German']}
@@ -102,29 +90,16 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                   ref={ref}
                   className="flex flex-col bg-white px-2 pt-2 pb-3 space-y-1 sm:px-3"
                 >
-                  <CustomLink
-                      to="/about"
-                      scroll={false}
-                      className="cursor-pointer hover:bg-blue-600 text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                    >
-                      About
-                    </CustomLink>
-
-                    <CustomLink
+                  {MenuItems.map(({name, label}, index) => (
+                      <CustomLink
+                      key={index}
                       to="#"
                       scroll={false}
-                      className="cursor-pointer hover:bg-blue-600 text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                      className={`${router.pathname=='/assessment'? 'text-blue-500' : 'text-black'} cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
                     >
-                      Assessments
+                      {label}
                     </CustomLink>
-
-                    <CustomLink
-                      to="#"
-                      scroll={false}
-                      className="cursor-pointer hover:bg-blue-600 text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                    >
-                      Contact
-                    </CustomLink>
+                    ))}
 
                     <DropDownMenu
                       title="Language"
@@ -144,52 +119,6 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
           </Transition>
         </nav>
       </div>
-      {/* <div className="space-x-5 m-5">
-        <CustomLink to="/" scroll={false}>
-          EA-Assessment
-        </CustomLink>
-      </div>
-      <div className="space-x-5 m-5">
-        <button className="text-gray-700 inline-flex p-3 hover:bg-gray-900 rounded md:hidden ml-auto">
-          <i className="fas fa-bars"></i>
-        </button>
-
-        <div
-          className="hidden top-nav w-full md:inline-flex md:flex-grow md:w-auto"
-          id="navigation"
-        >
-          <div className="md:inline-flex md:flex-row md:gap-2 md:ml-auto flex flex-col">
-            <CustomLink
-              to="/"
-              scroll={false}
-              className="md:border border-gray-700 md:inline-flex md:w-auto px-3 py-2 rounded text-gray-700 hover:text-white hover:bg-gray-700"
-            >
-              Home
-            </CustomLink>
-            <CustomLink
-              to="/"
-              scroll={false}
-              className="md:border border-gray-700 md:inline-flex md:w-auto px-3 py-2 rounded text-gray-700 hover:text-white hover:bg-gray-700"
-            >
-              services
-            </CustomLink>
-            <CustomLink
-              to="/"
-              scroll={false}
-              className="md:border border-gray-700 md:inline-flex md:w-auto px-3 py-2 rounded text-gray-700 hover:text-white hover:bg-gray-700"
-            >
-              about
-            </CustomLink>
-            <CustomLink
-              to="/"
-              scroll={false}
-              className="md:border border-gray-700 md:inline-flex md:w-auto px-3 py-2 rounded text-gray-700 hover:text-white hover:bg-gray-700"
-            >
-              contact
-            </CustomLink>
-          </div>
-        </div>
-      </div> */}
     </header>
   );
 };
