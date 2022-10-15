@@ -1,12 +1,18 @@
-import Navbar from 'components/Navbar/Navbar';
 import Head from 'next/head';
 import { ReactNode } from 'react';
 
-export interface IPrimaryLayout {
-    children: ReactNode
+import Header from '../../navigation/Header/Header';
+import Footer from '../../navigation/Footer/Footer';
+
+// export interface IPrimaryLayout {
+//   children: ReactNode;
+// }
+
+export interface IPrimaryLayout extends React.ComponentPropsWithoutRef<'div'> {
+  justify?: 'items-center' | 'items-start';
 }
 
-const PrimaryLayout: React.FC<IPrimaryLayout> = ({ children }) => {
+const PrimaryLayout: React.FC<IPrimaryLayout> = ({ children, ...divProps }) => {
   return (
     <>
       <Head>
@@ -15,13 +21,11 @@ const PrimaryLayout: React.FC<IPrimaryLayout> = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header>
-        <Navbar />
-      </header>
+      <Header />
 
-      <main className="md:container">
-        {children}
-      </main>
+      <main className="md:container">{children}</main>
+
+      <Footer />
     </>
   );
 };

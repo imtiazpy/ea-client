@@ -5,8 +5,14 @@ import type { NextPage } from 'next';
 const Home: NextPage = () => {
   return (
     <div>
-      <p className='text-3xl'>
-        Hello from index lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet 
+      <p className="text-3xl">
+        Hello from index lorem ipsum dolor sit amet lorem ipsum dolor sit amet
+        lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor
+        sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem
+        ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit
+        amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum
+        dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
+        lorem ipsum dolor sit amet
       </p>
     </div>
   );

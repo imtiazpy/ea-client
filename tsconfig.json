@@ -15,12 +15,13 @@
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": ".",
-    // TODO: bellow item is not woking need to work on that
-    "paths": {
-      "~icons": [
-        "src/assets/icons",
-      ]
-    }
+    "types": ["node"],
+    "typeRoots": ["../node_modules/@types", "../@types"]
+    // TODO: bellow item is not working need to work on that
+    // "paths": {
+    //   "~icons": ["src/assets/icons"],
+    //   "~components": ["src/components"]
+    // }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
