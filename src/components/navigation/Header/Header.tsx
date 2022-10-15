@@ -2,7 +2,6 @@ import { CustomLink } from '../../Common';
 
 import React from 'react';
 import { Transition } from '@headlessui/react';
-import { Link } from 'react-scroll';
 
 import { DropDownMenu } from '../../Common';
 
