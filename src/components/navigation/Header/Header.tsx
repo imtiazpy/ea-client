@@ -3,20 +3,17 @@ import { useRouter } from 'next/router';
 import { Transition } from '@headlessui/react';
 import { DropDownMenu, CustomLink } from '../../Common';
 import { MenuItems } from './MenuItems';
-
+import AuthButton from '../../Buttons/Auth/AuthButton';
 
 export interface IHeader extends React.ComponentPropsWithoutRef<'header'> {}
 
 const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const router = useRouter()
+  const router = useRouter();
 
   return (
-    <header
-      {...headerProps}
-      className={`${className}`}
-    >
+    <header {...headerProps} className={`${className}`}>
       <div>
         <nav className="shadow-sm w-full z-10">
           <div className="w-full">
@@ -31,15 +28,19 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                 </div>
                 <div className="hidden md:block">
                   <div className="ml-10 flex items-baseline space-x-4">
-                    {MenuItems.map(({name, label}, index) => (
+                    {MenuItems.map(({ name, label }, index) => (
                       <CustomLink
-                      key={index}
-                      to="#"
-                      scroll={false}
-                      className={`${router.pathname=='/assessment'? 'text-blue-500' : 'text-black'} cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
-                    >
-                      {label}
-                    </CustomLink>
+                        key={index}
+                        to="#"
+                        scroll={false}
+                        className={`${
+                          router.pathname == '/assessment'
+                            ? 'text-blue-500'
+                            : 'text-black'
+                        } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
+                      >
+                        {label}
+                      </CustomLink>
                     ))}
                     <DropDownMenu
                       title="Language"
@@ -53,6 +54,7 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                     >
                       <i className="fas fa-sign-in-alt"></i>
                     </CustomLink>
+                    <AuthButton />
                   </div>
                 </div>
               </div>
@@ -90,29 +92,33 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                   ref={ref}
                   className="flex flex-col bg-white px-2 pt-2 pb-3 space-y-1 sm:px-3"
                 >
-                  {MenuItems.map(({name, label}, index) => (
-                      <CustomLink
+                  {MenuItems.map(({ name, label }, index) => (
+                    <CustomLink
                       key={index}
                       to="#"
                       scroll={false}
-                      className={`${router.pathname=='/assessment'? 'text-blue-500' : 'text-black'} cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
+                      className={`${
+                        router.pathname == '/assessment'
+                          ? 'text-blue-500'
+                          : 'text-black'
+                      } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
                     >
                       {label}
                     </CustomLink>
-                    ))}
+                  ))}
 
-                    <DropDownMenu
-                      title="Language"
-                      items={['English', 'German']}
-                    />
+                  <DropDownMenu
+                    title="Language"
+                    items={['English', 'German']}
+                  />
 
-                    <CustomLink
-                      to="#"
-                      scroll={false}
-                      className="cursor-pointer bg-blue-600 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-black"
-                    >
-                      <i className="fas fa-sign-in-alt"></i>
-                    </CustomLink>
+                  <CustomLink
+                    to="#"
+                    scroll={false}
+                    className="cursor-pointer bg-blue-600 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-black"
+                  >
+                    <i className="fas fa-sign-in-alt"></i>
+                  </CustomLink>
                 </div>
               </div>
             )}
