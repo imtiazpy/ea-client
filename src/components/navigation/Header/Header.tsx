@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useRouter } from 'next/router';
 import { Transition } from '@headlessui/react';
 import { DropDownMenu, CustomLink } from '../../Common';
 import { MenuItems } from './MenuItems';
 import AuthButton from '../../Buttons/Auth/AuthButton';
+import ModalsContext from '../../../context/Modals/ModalsContext';
 
 export interface IHeader extends React.ComponentPropsWithoutRef<'header'> {}
 
 const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
   const [isOpen, setIsOpen] = React.useState(false);
+
+  const { toggleSignInModal } = useContext(ModalsContext);
 
   const router = useRouter();
 
@@ -31,10 +34,10 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                     {MenuItems.map(({ name, label }, index) => (
                       <CustomLink
                         key={index}
-                        to="#"
+                        to={`/${name}`}
                         scroll={false}
                         className={`${
-                          router.pathname == '/assessment'
+                          router.pathname == `/${name}`
                             ? 'text-blue-500'
                             : 'text-black'
                         } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
@@ -51,10 +54,15 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                       to="#"
                       scroll={false}
                       className="cursor-pointer bg-blue-600 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-black"
+                      onClick={(e: any) => {
+                        e.preventDefault();
+                        toggleSignInModal();
+                      }}
                     >
-                      <i className="fas fa-sign-in-alt"></i>
+                      <i className="fas fa-sign-in-alt w-16 text-center">
+                        <span className='tooltip-text ml-1'>Sign In</span>
+                      </i>
                     </CustomLink>
-                    <AuthButton />
                   </div>
                 </div>
               </div>
@@ -95,10 +103,10 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                   {MenuItems.map(({ name, label }, index) => (
                     <CustomLink
                       key={index}
-                      to="#"
+                      to={`/${name}`}
                       scroll={false}
                       className={`${
-                        router.pathname == '/assessment'
+                        router.pathname == `/${name}`
                           ? 'text-blue-500'
                           : 'text-black'
                       } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
@@ -116,6 +124,10 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                     to="#"
                     scroll={false}
                     className="cursor-pointer bg-blue-600 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-black"
+                    onClick={(e: any) => {
+                      e.preventDefault();
+                      toggleSignInModal();
+                    }}
                   >
                     <i className="fas fa-sign-in-alt"></i>
                   </CustomLink>

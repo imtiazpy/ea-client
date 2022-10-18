@@ -1,14 +1,11 @@
-import useInterCeptor from "./interceptor";
-
+import useInterCeptor from './interceptor';
 
 const useApiHelper = () => {
-    const axios = useInterCeptor();
+  const axios = useInterCeptor();
 
-    const api = {
+  const api = {};
 
-    };
-
-    return api;
+  return api;
 };
 
 export default useApiHelper;

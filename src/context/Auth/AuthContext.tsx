@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { deleteAllCookies } from '../../utility/';
 
-interface IAuthContext {
+export interface IAuthContext {
   authenticated: false | true;
   login: () => void;
   logout: () => void;
@@ -22,36 +22,35 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
   const [authenticated, setAuthenticated] = useState(
     defaultValue.authenticated
   );
-  const [validationError, setValidationError] = useState(null)
+  const [validationError, setValidationError] = useState(null);
 
-
-  const router = useRouter()
+  const router = useRouter();
 
   const login = () => setAuthenticated(true);
-  const logout = () => {
 
+  const logout = () => {
     localStorage.clear();
     deleteAllCookies();
-    setAuthenticated(false)
+    setAuthenticated(false);
   };
 
   // Error Callback Functions
   const validationErrorCB = (error: any) => {
     setValidationError(error?.response?.data?.detail);
-  }
+  };
 
   const loginSuccessCB = (response: any) => {
     if (response?.access) {
       Cookies.set('accessToken', response.access);
-      
-      toast.success("you are logged in");
+
+      toast.success('you are logged in');
       setValidationError(null);
       router.push('/dashboard');
     }
-  }
+  };
 
   const handleSignUpSuccess = (response: any) => {
-    toast.success("your registration Done");
+    toast.success('your registration Done');
     setValidationError(null);
     router.push('/activation');
     // if (response?.token) {
@@ -60,7 +59,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     //   setValidationError(null);
     //   router.push('/dashboard');
     // }
-  }
+  };
 
   return (
     <AuthContext.Provider value={{ authenticated, login, logout }}>

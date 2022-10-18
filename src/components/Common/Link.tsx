@@ -6,6 +6,7 @@ export interface ICustomLink {
   scroll: boolean;
   children: ReactNode;
   className?: string;
+  onClick?: (e: any) => void;
 }
 
 const CustomLink: React.FC<ICustomLink> = ({
