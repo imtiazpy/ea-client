@@ -2,11 +2,57 @@ import { Dialog, Transition } from '@headlessui/react';
 import ModalsContext from '../../../../context/Modals/ModalsContext';
 import {PasswordField} from '../../../Common';
 import { Fragment, useContext, useState } from 'react';
+import { useApiHelper } from '../../../../utility';
+import { useRouter } from 'next/router';
+import AuthContext from '../../../../context/Auth/AuthContext';
+import { toast } from 'react-toastify';
+import { InputField } from '../../../Common';
 
 export interface ISignUpModal extends React.ComponentPropsWithoutRef<'div'> {}
 
+export interface IFormData {
+  name: string;
+  email: string;
+  type: string;
+  password: string;
+  re_password: string;
+}
+
 const SignUpModal: React.FC<ISignUpModal> = ({ className, ...divProps }) => {
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    type: "JOB_SEEKER",
+    password: "",
+    re_password: ""
+  });
+  const [errorData, setErrorData] = useState('')
+
   const { signUpModalShow, toggleSignUpModal, toggleSignInModal } = useContext(ModalsContext);
+  const gContext = useContext(AuthContext);
+  const api = useApiHelper();
+  const router = useRouter();
+
+  const handleChange = (e: any) => {
+    setFormData({...formData, [e.target.name]: e.target.value})
+  }
+
+  const onSubmit = (e: any) => {
+    e.preventDefault()
+
+    if (formData.password === formData.re_password) {
+      api.signUp({...formData}).then((response) => {
+        gContext.handleSignUpSuccess()
+        toggleSignUpModal();
+      }).catch((err) => {
+        gContext.validationErrorCB(err);
+      });
+    } else {
+      setErrorData("Password Didn't match");
+    }
+
+  }
 
   return (
     <>
@@ -46,7 +92,8 @@ const SignUpModal: React.FC<ISignUpModal> = ({ className, ...divProps }) => {
                           >
                             Create an account
                           </Dialog.Title>
-                          <form className="space-y-4 md:space-y-6 text-left" action="#">
+                        
+                          <form className="space-y-4 md:space-y-6 text-left" action="/" onSubmit={(e) => onSubmit(e)}>
                           <div>
                               <label
                                 htmlFor="name"
@@ -54,12 +101,13 @@ const SignUpModal: React.FC<ISignUpModal> = ({ className, ...divProps }) => {
                               >
                                 Your Name
                               </label>
-                              <input
+                              <InputField 
                                 type="text"
                                 name="name"
                                 id="name"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Your Name..."
+                                onChange={handleChange}
                                 required
                               />
                             </div>
@@ -70,12 +118,13 @@ const SignUpModal: React.FC<ISignUpModal> = ({ className, ...divProps }) => {
                               >
                                 Your email
                               </label>
-                              <input
+                              <InputField 
                                 type="email"
                                 name="email"
                                 id="email"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="name@company.com"
+                                onChange={handleChange}
                                 required
                               />
                             </div>
@@ -90,6 +139,7 @@ const SignUpModal: React.FC<ISignUpModal> = ({ className, ...divProps }) => {
                                 name='password'
                                 id='password'
                                 placeholder='••••••••'
+                                onChange={handleChange}
                               />
                             </div>
                             <div>
@@ -100,9 +150,10 @@ const SignUpModal: React.FC<ISignUpModal> = ({ className, ...divProps }) => {
                                 Confirm password
                               </label>
                               <PasswordField 
-                                name='confirm-password'
+                                name='re_password'
                                 id='confirm-password'
                                 placeholder='••••••••'
+                                onChange={handleChange}
                               />
                             </div>
                             <div className="flex items-start">

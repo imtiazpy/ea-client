@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 
 export const NEXT_PUBLIC_APP_API_URL =
-  process.env.NEXT_PUBLIC_APP_API_URL || 'http://127.0.0.1:8000/';
+  process.env.NEXT_PUBLIC_APP_API_URL || 'http://127.0.0.1:8000/api/v1/';
 
 export const deleteAllCookies = () => {
   document.cookie.split(';').forEach(function (c) {

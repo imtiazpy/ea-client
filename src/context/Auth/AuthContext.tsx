@@ -6,14 +6,24 @@ import { deleteAllCookies } from '../../utility/';
 
 export interface IAuthContext {
   authenticated: false | true;
+  isEmployer: false | true;
+  isJobSeeker: false | true;
+  validationError: any;
   login: () => void;
   logout: () => void;
+  handleSignUpSuccess: () => any;
+  validationErrorCB: (error: object) => any;
 }
 
 const defaultValue: IAuthContext = {
   authenticated: false,
+  isEmployer: false,
+  isJobSeeker: false,
+  validationError: null,
   login: () => undefined,
   logout: () => undefined,
+  handleSignUpSuccess: () => undefined,
+  validationErrorCB: () => undefined
 };
 
 const AuthContext = createContext<IAuthContext>(defaultValue);
@@ -22,7 +32,10 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
   const [authenticated, setAuthenticated] = useState(
     defaultValue.authenticated
   );
-  const [validationError, setValidationError] = useState(null);
+  const [isEmployer, setIsEmployer] = useState<boolean>(defaultValue.isEmployer);
+  const [isJobSeeker, setIsJobSeeker] = useState<boolean>(defaultValue.isJobSeeker);
+
+  const [validationError, setValidationError] = useState(defaultValue.validationError);
 
   const router = useRouter();
 
@@ -36,12 +49,14 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
 
   // Error Callback Functions
   const validationErrorCB = (error: any) => {
-    setValidationError(error?.response?.data?.detail);
+    setValidationError(error?.response?.data);
+    toast.error("Submission failed")
   };
 
   const loginSuccessCB = (response: any) => {
     if (response?.access) {
       Cookies.set('accessToken', response.access);
+      Cookies.set('userType', response.user.type);
 
       toast.success('you are logged in');
       setValidationError(null);
@@ -49,7 +64,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     }
   };
 
-  const handleSignUpSuccess = (response: any) => {
+  const handleSignUpSuccess = () => {
     toast.success('your registration Done');
     setValidationError(null);
     router.push('/activation');
@@ -62,7 +77,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ authenticated, login, logout }}>
+    <AuthContext.Provider value={{ authenticated, isEmployer, isJobSeeker, validationError, login, logout, handleSignUpSuccess, validationErrorCB }}>
       {children}
     </AuthContext.Provider>
   );
