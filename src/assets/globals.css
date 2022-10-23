@@ -9,7 +9,6 @@
     }
   } */
 
-
 /* .tooltip {
   position: relative;
   display: inline-block;
@@ -29,6 +28,6 @@
   z-index: 1;
 } */
 
-  .tooltip:hover .tooltiptext {
-    display: block;
-  }
+.tooltip:hover .tooltiptext {
+  display: block;
+}

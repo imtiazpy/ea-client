@@ -23,7 +23,7 @@ export const ModalsProvider: React.FC<any> = ({ children }) => {
 
   const [signInModalShow, setSignInModalShow] = useState<boolean>(
     defaultValue.signInModalShow
-  )
+  );
 
   const toggleSignUpModal = () => {
     setSignUpModalShow(!signUpModalShow);
@@ -34,9 +34,14 @@ export const ModalsProvider: React.FC<any> = ({ children }) => {
   };
 
   return (
-    <ModalsContext.Provider value={
-      { signUpModalShow, signInModalShow, toggleSignUpModal, toggleSignInModal }
-    }>
+    <ModalsContext.Provider
+      value={{
+        signUpModalShow,
+        signInModalShow,
+        toggleSignUpModal,
+        toggleSignInModal,
+      }}
+    >
       {children}
     </ModalsContext.Provider>
   );

@@ -23,7 +23,7 @@ const defaultValue: IAuthContext = {
   login: () => undefined,
   logout: () => undefined,
   handleSignUpSuccess: () => undefined,
-  validationErrorCB: () => undefined
+  validationErrorCB: () => undefined,
 };
 
 const AuthContext = createContext<IAuthContext>(defaultValue);
@@ -32,10 +32,16 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
   const [authenticated, setAuthenticated] = useState(
     defaultValue.authenticated
   );
-  const [isEmployer, setIsEmployer] = useState<boolean>(defaultValue.isEmployer);
-  const [isJobSeeker, setIsJobSeeker] = useState<boolean>(defaultValue.isJobSeeker);
+  const [isEmployer, setIsEmployer] = useState<boolean>(
+    defaultValue.isEmployer
+  );
+  const [isJobSeeker, setIsJobSeeker] = useState<boolean>(
+    defaultValue.isJobSeeker
+  );
 
-  const [validationError, setValidationError] = useState(defaultValue.validationError);
+  const [validationError, setValidationError] = useState(
+    defaultValue.validationError
+  );
 
   const router = useRouter();
 
@@ -50,7 +56,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
   // Error Callback Functions
   const validationErrorCB = (error: any) => {
     setValidationError(error?.response?.data);
-    toast.error("Submission failed")
+    toast.error('Submission failed');
   };
 
   const loginSuccessCB = (response: any) => {
@@ -77,7 +83,18 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ authenticated, isEmployer, isJobSeeker, validationError, login, logout, handleSignUpSuccess, validationErrorCB }}>
+    <AuthContext.Provider
+      value={{
+        authenticated,
+        isEmployer,
+        isJobSeeker,
+        validationError,
+        login,
+        logout,
+        handleSignUpSuccess,
+        validationErrorCB,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -5,8 +5,10 @@ const useApiHelper = () => {
 
   const api = {
     // authentication
-    signUp: (data: any, params={}) => axios.post(`auth/users/`, data, {params: params}),
-    login: (data: any, params={}) => axios.post(`auth/jwt/create/`, data, {params: params}),
+    signUp: (data: any, params = {}) =>
+      axios.post(`auth/users/`, data, { params: params }),
+    login: (data: any, params = {}) =>
+      axios.post(`auth/jwt/create/`, data, { params: params }),
   };
 
   return api;

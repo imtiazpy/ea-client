@@ -25,7 +25,7 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                 <div className="flex justify-center items-center flex-shrink-0 ">
                   <h1 className=" font-bold text-xl cursor-pointer">
                     <CustomLink to="/" scroll={false}>
-                      Employee<span className="text-blue-500">Assessment</span>
+                      Employee<span className="text-blue-600">Assessment</span>
                     </CustomLink>
                   </h1>
                 </div>
@@ -60,7 +60,7 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                       }}
                     >
                       <i className="fas fa-sign-in-alt w-16 text-center">
-                        <span className='tooltip-text ml-1'>Sign In</span>
+                        <span className="tooltip-text ml-1">Sign In</span>
                       </i>
                     </CustomLink>
                   </div>

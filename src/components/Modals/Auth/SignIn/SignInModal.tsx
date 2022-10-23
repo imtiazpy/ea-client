@@ -1,12 +1,13 @@
 import { Dialog, Transition } from '@headlessui/react';
 import ModalsContext from '../../../../context/Modals/ModalsContext';
-import {PasswordField} from '../../../Common';
+import { PasswordField, InputField } from '../../../Common';
 import { Fragment, useContext, useState } from 'react';
 
 export interface ISignInModal extends React.ComponentPropsWithoutRef<'div'> {}
 
 const SignInModal = () => {
-  const {signInModalShow, toggleSignInModal, toggleSignUpModal} = useContext(ModalsContext);
+  const { signInModalShow, toggleSignInModal, toggleSignUpModal } =
+    useContext(ModalsContext);
 
   return (
     <>
@@ -46,8 +47,28 @@ const SignInModal = () => {
                           >
                             Sing In
                           </Dialog.Title>
-                          <form className="space-y-4 md:space-y-6 text-left" action="#">
-                            <div>
+                          <form
+                            className="space-y-4 md:space-y-6 text-left"
+                            action="#"
+                          >
+                            <InputField
+                              label="Your Email"
+                              type="email"
+                              name="email"
+                              id="email"
+                              placeholder="jondoe@example.com"
+                              // onChange={handleChange}
+                              required
+                            />
+
+                            <PasswordField
+                              name="password"
+                              id="password"
+                              placeholder="Your Password"
+                              // onChange={handleChange}
+                            />
+
+                            {/* <div>
                               <label
                                 htmlFor="email"
                                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -70,12 +91,12 @@ const SignInModal = () => {
                               >
                                 Password
                               </label>
-                              <PasswordField 
-                                name='password'
-                                id='password'
-                                placeholder='••••••••'
+                              <PasswordField
+                                name="password"
+                                id="password"
+                                placeholder="••••••••"
                               />
-                            </div>
+                            </div> */}
                             <button
                               type="submit"
                               className="w-full text-primary-600 bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"

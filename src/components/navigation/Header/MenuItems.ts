@@ -4,7 +4,7 @@ export const MenuItems = [
     label: 'Companies',
   },
   {
-    name: "news",
+    name: 'news',
     label: "What's new?",
   },
   {

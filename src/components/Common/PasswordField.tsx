@@ -1,60 +1,69 @@
-import { useContext, useState } from "react";
+import { useContext, useState } from 'react';
 
 import AuthContext from '../../context/Auth/AuthContext';
 import { FormError } from '../Common';
 
-export interface IPasswordField extends React.ComponentPropsWithoutRef<'input'> {
-    placeholder: string;
-    name: string;
-    id: string;
+export interface IPasswordField
+  extends React.ComponentPropsWithoutRef<'input'> {
+  placeholder: string;
+  name: string;
+  id?: string;
 }
 
+const PasswordField: React.FC<IPasswordField> = ({
+  className,
+  placeholder,
+  name,
+  id,
+  ...inputProps
+}) => {
+  const [showPass, setShowPass] = useState<boolean>(true);
 
-const PasswordField: React.FC<IPasswordField> = (
-    { className, placeholder, name, id, ...inputProps }
-) => {
+  const gContext = useContext(AuthContext);
 
-    const [showPass, setShowPass] = useState<boolean>(true);
+  const togglePassword = () => {
+    setShowPass(!showPass);
+  };
 
-    const gContext = useContext(AuthContext)
+  return (
+    <>
+      {gContext.validationError && (
+        <FormError formError={gContext.validationError} name={name} />
+      )}
+      <div className="relative mb-8">
+        <input
+          {...inputProps}
+          className="w-full h-10 text-gray-900 placeholder-transparent border-b-2 border-gray-300 peer focus:outline-none focus:border-blue-600"
+          type={showPass ? 'password' : 'text'}
+          placeholder={placeholder}
+          required
+          name={name}
+          id={id}
+        />
 
-    const togglePassword = () => {
-        setShowPass(!showPass);
-    };
-
-    return (
-        <>
-            {
-            gContext.validationError && 
-            <FormError formError={gContext.validationError} name={name} />
-            }
-            <div className="relative">
-                <input 
-                    {...inputProps}
-                    className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${className}`}
-                    type={showPass ? "password" : "text"}
-                    placeholder={placeholder}
-                    required
-                    name={name}
-                    id={id}
-                />
-                <a
-                    href="#"
-                    className="absolute top-2.5 right-0 mr-6 text-black"
-                    onClick={(e) => {
-                    e.preventDefault();
-                    togglePassword();
-                    }}
-                >
-                    {!showPass ? (
-                    <i className="fas fa-eye-slash"></i>
-                    ): (
-                    <i className="fas fa-eye"></i>
-                    )}
-                </a>
-            </div>
-        </>
-    );
+        <label
+          htmlFor="password"
+          className="absolute left-0 -top-3.5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
+        >
+          Password
+        </label>
+        <a
+          href="#"
+          className="absolute top-2.5 right-0 mr-6 text-black"
+          onClick={(e) => {
+            e.preventDefault();
+            togglePassword();
+          }}
+        >
+          {!showPass ? (
+            <i className="fas fa-eye-slash"></i>
+          ) : (
+            <i className="fas fa-eye"></i>
+          )}
+        </a>
+      </div>
+    </>
+  );
 };
 
 export default PasswordField;
