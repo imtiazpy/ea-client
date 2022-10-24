@@ -1,9 +1,10 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { deleteAllCookies } from '../../utility/';
 import { useApiHelper } from '../../utility';
+import CoreConstraint from '../../coreConstraint';
 
 export interface IAuthContext {
   authenticated: false | true;
@@ -24,7 +25,7 @@ const defaultValue: IAuthContext = {
   logout: () => undefined,
   handleSignUpSuccess: () => undefined,
   validationErrorCB: () => undefined,
-  loginSuccessCB: () => undefined
+  loginSuccessCB: () => undefined,
 };
 
 const AuthContext = createContext<IAuthContext>(defaultValue);
@@ -47,13 +48,12 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
   const router = useRouter();
   const api = useApiHelper();
 
-
   const logout = () => {
     localStorage.clear();
     deleteAllCookies();
     setAuthenticated(false);
-    router.push('/')
-    toast.success("You're logged out")
+    router.push('/');
+    toast.success("You're logged out");
   };
 
   // Error Callback Functions
@@ -65,12 +65,18 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
   const loginSuccessCB = (response: any) => {
     if (response?.access) {
       Cookies.set('accessToken', response.access);
-      api.userType().then((res: any) => {
-        Cookies.set('userType', res.type);
-        console.log(res)
-      }).catch(err => {
-        toast.error("User not found!");
-      })
+      setAuthenticated(true);
+
+      // Checking and setting the user type in cookies
+      api
+        .userType()
+        .then((res: any) => {
+          Cookies.set('userType', res.type);
+        })
+        .catch((err) => {
+          toast.error('User not found!');
+        });
+
       toast.success('you are logged in');
       setValidationError(null);
       // router.push('/dashboard');
@@ -81,13 +87,25 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     toast.success('your registration Done');
     setValidationError(null);
     router.push('/activation');
-    // if (response?.token) {
-    //   Cookies.set('accessToken', response.token);
-    //   toast.success("your registration Done");
-    //   setValidationError(null);
-    //   router.push('/dashboard');
-    // }
   };
+
+  useEffect(() => {
+    // decide if authenticated or not
+    if (Cookies.get('accessToken')) {
+      return setAuthenticated(true);
+    } else {
+      return setAuthenticated(false);
+    }
+  });
+
+  useEffect(() => {
+    // check the user type
+    if (Cookies.get('userType') === CoreConstraint.EMPLOYER) {
+      return setIsEmployer(true);
+    } else if (Cookies.get('userType') === CoreConstraint.JOB_SEEKER) {
+      return setIsJobSeeker(true);
+    }
+  });
 
   return (
     <AuthContext.Provider
@@ -99,7 +117,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
         logout,
         handleSignUpSuccess,
         validationErrorCB,
-        loginSuccessCB
+        loginSuccessCB,
       }}
     >
       {children}

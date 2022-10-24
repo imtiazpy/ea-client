@@ -11,27 +11,27 @@ const SignInModal: React.FC<ISignInModal> = ({ className, ...divProps }) => {
   const { signInModalShow, toggleSignInModal, toggleSignUpModal } =
     useContext(ModalsContext);
 
-  const [formData, setFormData] = useState({})
+  const [formData, setFormData] = useState({});
 
   const api = useApiHelper();
-  const gContext = useContext(AuthContext)
+  const gContext = useContext(AuthContext);
 
   const handleChange = (e: any) => {
-    setFormData({...formData, [e.target.name]: e.target.value})
-  }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    api.login(formData).then(response => {
-      gContext.loginSuccessCB(response);
-      toggleSignInModal();
-    }).catch(err => {
-      gContext.validationErrorCB(err);
-    });
+    api
+      .login(formData)
+      .then((response) => {
+        gContext.loginSuccessCB(response);
+        toggleSignInModal();
+      })
+      .catch((err) => {
+        gContext.validationErrorCB(err);
+      });
   };
-
-
-  
 
   return (
     <>
@@ -73,7 +73,8 @@ const SignInModal: React.FC<ISignInModal> = ({ className, ...divProps }) => {
                           </Dialog.Title>
                           <form
                             className="space-y-4 md:space-y-6 text-left"
-                            action="/" onSubmit={e => handleSubmit(e)}
+                            action="/"
+                            onSubmit={(e) => handleSubmit(e)}
                           >
                             <InputField
                               label="Your Email"

@@ -1,17 +1,32 @@
 import { useContext } from 'react';
 import AuthContext from '../../../context/Auth/AuthContext';
 
-export interface IAuthButton extends React.ComponentPropsWithoutRef<'button'> {}
+export interface IAuthButton extends React.ComponentPropsWithoutRef<'button'> {
+  signIn: () => void;
+}
 
-const AuthButton: React.FC<IAuthButton> = ({ className, ...buttonProps }) => {
+const AuthButton: React.FC<IAuthButton> = ({
+  className,
+  signIn,
+  ...buttonProps
+}) => {
   const { authenticated, logout } = useContext(AuthContext);
 
   return (
     <button
-      className={`${className} border-1 p-2 px-4 sm:px-6 bg-blue-500 rounded text-white w-28`}
+      onClick={authenticated ? logout : signIn}
+      className={`${className} cursor-pointer bg-blue-600 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-black`}
       {...buttonProps}
     >
-      {authenticated ? 'Sign Out' : 'Sign In'}
+      {/* <i className="fas fa-sign-out-alt text-center">
+        {authenticated ? 'Sign Out' : 'Sign In'}
+      </i> */}
+
+      {authenticated ? (
+        <i className="fas fa-sign-out-alt text-center">&nbsp;Sign Out</i>
+      ) : (
+        <i className="fas fa-sign-in-alt text-center">&nbsp;Sing In</i>
+      )}
     </button>
   );
 };

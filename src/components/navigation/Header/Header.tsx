@@ -3,8 +3,9 @@ import { useRouter } from 'next/router';
 import { Transition } from '@headlessui/react';
 import { DropDownMenu, CustomLink } from '../../Common';
 import { MenuItems } from './MenuItems';
-import AuthButton from '../../Buttons/Auth/AuthButton';
 import ModalsContext from '../../../context/Modals/ModalsContext';
+import AuthContext from '../../../context/Auth/AuthContext';
+import AuthButton from '../../Buttons/Auth/AuthButton';
 
 export interface IHeader extends React.ComponentPropsWithoutRef<'header'> {}
 
@@ -14,6 +15,7 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
   const { toggleSignInModal } = useContext(ModalsContext);
 
   const router = useRouter();
+  const gContext = useContext(AuthContext);
 
   return (
     <header {...headerProps} className={`${className}`}>
@@ -38,7 +40,7 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                         scroll={false}
                         className={`${
                           router.pathname == `/${name}`
-                            ? 'text-blue-500'
+                            ? 'text-blue-600'
                             : 'text-black'
                         } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
                       >
@@ -49,20 +51,10 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                       title="Language"
                       items={['English', 'German']}
                     />
-
-                    <CustomLink
-                      to="#"
-                      scroll={false}
-                      className="cursor-pointer bg-blue-600 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-black"
-                      onClick={(e: any) => {
-                        e.preventDefault();
-                        toggleSignInModal();
-                      }}
-                    >
-                      <i className="fas fa-sign-in-alt w-16 text-center">
-                        <span className="tooltip-text ml-1">Sign In</span>
-                      </i>
-                    </CustomLink>
+                    <AuthButton
+                      signIn={toggleSignInModal}
+                      // signOut is handled inside the component
+                    />
                   </div>
                 </div>
               </div>
@@ -120,17 +112,10 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                     items={['English', 'German']}
                   />
 
-                  <CustomLink
-                    to="#"
-                    scroll={false}
-                    className="cursor-pointer bg-blue-600 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-black"
-                    onClick={(e: any) => {
-                      e.preventDefault();
-                      toggleSignInModal();
-                    }}
-                  >
-                    <i className="fas fa-sign-in-alt"></i>
-                  </CustomLink>
+                  <AuthButton
+                    signIn={toggleSignInModal}
+                    // signOut is handled inside the component
+                  />
                 </div>
               </div>
             )}

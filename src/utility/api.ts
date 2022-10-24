@@ -9,7 +9,7 @@ const useApiHelper = () => {
       axios.post(`auth/users/`, data, { params: params }),
     login: (data: any, params = {}) =>
       axios.post(`auth/jwt/create/`, data, { params: params }),
-    userType: (params={}) => axios.get('auth/users/me/', {params: params}),
+    userType: (params = {}) => axios.get('auth/users/me/', { params: params }),
   };
 
   return api;
