@@ -3,16 +3,17 @@ import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { deleteAllCookies } from '../../utility/';
+import { useApiHelper } from '../../utility';
 
 export interface IAuthContext {
   authenticated: false | true;
   isEmployer: false | true;
   isJobSeeker: false | true;
   validationError: any;
-  login: () => void;
   logout: () => void;
   handleSignUpSuccess: () => any;
   validationErrorCB: (error: object) => any;
+  loginSuccessCB: (response: object) => any;
 }
 
 const defaultValue: IAuthContext = {
@@ -20,10 +21,10 @@ const defaultValue: IAuthContext = {
   isEmployer: false,
   isJobSeeker: false,
   validationError: null,
-  login: () => undefined,
   logout: () => undefined,
   handleSignUpSuccess: () => undefined,
   validationErrorCB: () => undefined,
+  loginSuccessCB: () => undefined
 };
 
 const AuthContext = createContext<IAuthContext>(defaultValue);
@@ -44,13 +45,15 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
   );
 
   const router = useRouter();
+  const api = useApiHelper();
 
-  const login = () => setAuthenticated(true);
 
   const logout = () => {
     localStorage.clear();
     deleteAllCookies();
     setAuthenticated(false);
+    router.push('/')
+    toast.success("You're logged out")
   };
 
   // Error Callback Functions
@@ -62,11 +65,15 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
   const loginSuccessCB = (response: any) => {
     if (response?.access) {
       Cookies.set('accessToken', response.access);
-      Cookies.set('userType', response.user.type);
-
+      api.userType().then((res: any) => {
+        Cookies.set('userType', res.type);
+        console.log(res)
+      }).catch(err => {
+        toast.error("User not found!");
+      })
       toast.success('you are logged in');
       setValidationError(null);
-      router.push('/dashboard');
+      // router.push('/dashboard');
     }
   };
 
@@ -89,10 +96,10 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
         isEmployer,
         isJobSeeker,
         validationError,
-        login,
         logout,
         handleSignUpSuccess,
         validationErrorCB,
+        loginSuccessCB
       }}
     >
       {children}

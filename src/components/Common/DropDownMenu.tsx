@@ -11,7 +11,7 @@ const DropDownMenu: React.FC<IDropDownMenu> = ({ title, items }) => {
     <div>
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          <Menu.Button className="inline-flex w-full items-center gap-1 justify-center rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+          <Menu.Button className="inline-flex w-full items-center gap-1 justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-black focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
             <span>{title}</span>
             <i className="fas fa-chevron-down"></i>
           </Menu.Button>
@@ -32,7 +32,7 @@ const DropDownMenu: React.FC<IDropDownMenu> = ({ title, items }) => {
                   {({ active }) => (
                     <button
                       className={`${
-                        active ? 'bg-violet-500 text-white' : 'text-gray-900'
+                        active ? 'bg-blue-600 text-white' : 'text-gray-900'
                       } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                     >
                       {item}

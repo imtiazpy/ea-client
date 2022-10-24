@@ -64,7 +64,7 @@ const useInterCeptor = () => {
         localStorage.clear();
         deleteAllCookies();
         toast.error(error?.response?.data.detail);
-        router.push('/sign-in');
+        // router.push('/sign-in');
       }
       return Promise.reject(error);
     }

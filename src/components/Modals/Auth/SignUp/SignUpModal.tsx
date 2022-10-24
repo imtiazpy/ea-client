@@ -37,9 +37,8 @@ const SignUpModal: React.FC<ISignUpModal> = ({ className, ...divProps }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e: any) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
-
     if (formData.password === formData.re_password) {
       api
         .signUp({ ...formData })
@@ -97,7 +96,7 @@ const SignUpModal: React.FC<ISignUpModal> = ({ className, ...divProps }) => {
                           <form
                             className="space-y-4 md:space-y-6 text-left"
                             action="/"
-                            onSubmit={(e) => onSubmit(e)}
+                            onSubmit={(e) => handleSubmit(e)}
                           >
                             <InputField
                               label="Your Name"

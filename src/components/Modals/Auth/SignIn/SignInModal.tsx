@@ -1,13 +1,37 @@
 import { Dialog, Transition } from '@headlessui/react';
 import ModalsContext from '../../../../context/Modals/ModalsContext';
+import AuthContext from '../../../../context/Auth/AuthContext';
 import { PasswordField, InputField } from '../../../Common';
 import { Fragment, useContext, useState } from 'react';
+import { useApiHelper } from '../../../../utility';
 
 export interface ISignInModal extends React.ComponentPropsWithoutRef<'div'> {}
 
-const SignInModal = () => {
+const SignInModal: React.FC<ISignInModal> = ({ className, ...divProps }) => {
   const { signInModalShow, toggleSignInModal, toggleSignUpModal } =
     useContext(ModalsContext);
+
+  const [formData, setFormData] = useState({})
+
+  const api = useApiHelper();
+  const gContext = useContext(AuthContext)
+
+  const handleChange = (e: any) => {
+    setFormData({...formData, [e.target.name]: e.target.value})
+  }
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    api.login(formData).then(response => {
+      gContext.loginSuccessCB(response);
+      toggleSignInModal();
+    }).catch(err => {
+      gContext.validationErrorCB(err);
+    });
+  };
+
+
+  
 
   return (
     <>
@@ -49,7 +73,7 @@ const SignInModal = () => {
                           </Dialog.Title>
                           <form
                             className="space-y-4 md:space-y-6 text-left"
-                            action="#"
+                            action="/" onSubmit={e => handleSubmit(e)}
                           >
                             <InputField
                               label="Your Email"
@@ -57,7 +81,7 @@ const SignInModal = () => {
                               name="email"
                               id="email"
                               placeholder="jondoe@example.com"
-                              // onChange={handleChange}
+                              onChange={handleChange}
                               required
                             />
 
@@ -65,38 +89,9 @@ const SignInModal = () => {
                               name="password"
                               id="password"
                               placeholder="Your Password"
-                              // onChange={handleChange}
+                              onChange={handleChange}
                             />
 
-                            {/* <div>
-                              <label
-                                htmlFor="email"
-                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                              >
-                                Your email
-                              </label>
-                              <input
-                                type="email"
-                                name="email"
-                                id="email"
-                                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="name@company.com"
-                                required
-                              />
-                            </div>
-                            <div>
-                              <label
-                                htmlFor="password"
-                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                              >
-                                Password
-                              </label>
-                              <PasswordField
-                                name="password"
-                                id="password"
-                                placeholder="••••••••"
-                              />
-                            </div> */}
                             <button
                               type="submit"
                               className="w-full text-primary-600 bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
