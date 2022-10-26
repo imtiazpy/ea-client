@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import AuthContext from '../../../context/Auth/AuthContext';
 
 export interface IAuthButton extends React.ComponentPropsWithoutRef<'button'> {
-  signIn: () => void;
+  signIn?: () => void;
 }
 
 const AuthButton: React.FC<IAuthButton> = ({
@@ -18,10 +18,6 @@ const AuthButton: React.FC<IAuthButton> = ({
       className={`${className} cursor-pointer bg-blue-600 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-black`}
       {...buttonProps}
     >
-      {/* <i className="fas fa-sign-out-alt text-center">
-        {authenticated ? 'Sign Out' : 'Sign In'}
-      </i> */}
-
       {authenticated ? (
         <i className="fas fa-sign-out-alt text-center">&nbsp;Sign Out</i>
       ) : (

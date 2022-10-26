@@ -49,17 +49,19 @@ const useInterCeptor = () => {
     },
 
     (error) => {
-      if (error.response.status === 500) {
+      if (error.message) {
+        toast.error(error.message);
+      } else if (error.response?.status === 500) {
         toast.error('Internal Server Error');
-      } else if (error.response.status === 403) {
+      } else if (error.response?.status === 403) {
         toast.error(error?.response?.data.detail);
-      } else if (error.response.status === 404) {
+      } else if (error.response?.status === 404) {
         //will add later
-      } else if (error.response.status === 400) {
+      } else if (error.response?.status === 400) {
         //will add later
-      } else if (error.response.status === 409) {
+      } else if (error.response?.status === 409) {
         //will add later
-      } else if (error.response.status === 401) {
+      } else if (error.response?.status === 401) {
         // deleting cookies if user is not authorized
         localStorage.clear();
         deleteAllCookies();

@@ -59,7 +59,6 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
   // Error Callback Functions
   const validationErrorCB = (error: any) => {
     setValidationError(error?.response?.data);
-    toast.error('Submission failed');
   };
 
   const loginSuccessCB = (response: any) => {

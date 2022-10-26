@@ -47,6 +47,21 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                         {label}
                       </CustomLink>
                     ))}
+
+                    {gContext.authenticated && (
+                      <CustomLink
+                        to="/dashboard"
+                        scroll={false}
+                        className={`${
+                          router.pathname == `/dashboard`
+                            ? 'text-blue-600'
+                            : 'text-black'
+                        } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
+                      >
+                        Dashboard
+                      </CustomLink>
+                    )}
+
                     <DropDownMenu
                       title="Language"
                       items={['English', 'German']}
@@ -106,6 +121,20 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                       {label}
                     </CustomLink>
                   ))}
+
+                  {gContext.authenticated && (
+                      <CustomLink
+                        to="/dashboard"
+                        scroll={false}
+                        className={`${
+                          router.pathname == `/dashboard`
+                            ? 'text-blue-600'
+                            : 'text-black'
+                        } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
+                      >
+                        Dashboard
+                      </CustomLink>
+                  )}
 
                   <DropDownMenu
                     title="Language"

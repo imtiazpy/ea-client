@@ -4,7 +4,7 @@ import AuthContext from '../../context/Auth/AuthContext';
 import { FormError } from '../Common';
 
 export interface IInputField extends React.ComponentPropsWithoutRef<'input'> {
-  label: string;
+  label?: string;
   type: string;
   name: string;
   id: string;
@@ -39,7 +39,7 @@ const InputField: React.FC<IInputField> = ({
           id={id}
           placeholder={placeholder}
           onChange={onChange}
-          className="w-full h-10 text-gray-900 placeholder-transparent border-b-2 border-gray-300 peer focus:outline-none focus:border-blue-600"
+          className={`w-full h-10 text-gray-900 placeholder-transparent border-b-2 border-gray-300 peer focus:outline-none focus:border-blue-600 ${className}`}
           required
         />
 

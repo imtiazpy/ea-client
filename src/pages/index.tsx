@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
+import { NextPageWithLayout } from './page';
+import PrimaryLayout from '../components/Layouts/primary/PrimaryLayout';
 
-// import Image from 'next/image';
-
-const Home: NextPage = () => {
+const Home: NextPageWithLayout = () => {
   return (
     <div>
       <p className="text-3xl">
@@ -19,3 +19,7 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+Home.getLayout = (page) => {
+  return <PrimaryLayout>{page}</PrimaryLayout>;
+};
