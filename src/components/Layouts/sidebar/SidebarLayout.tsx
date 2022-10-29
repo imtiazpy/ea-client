@@ -1,5 +1,5 @@
 import Sidebar from '../../navigation/Sidebar/Sidebar';
-import Header from '../../navigation/Header/Header';
+import Footer from '../../navigation/Footer/Footer';
 import { InputField, SearchBox } from '../../Common';
 import { useRouter } from 'next/router';
 
@@ -28,6 +28,9 @@ const SidebarLayout: React.FC<ISidebarLayout> = ({
               </div>
             </div>
             <div>{children}</div>
+            <footer>
+              <Footer />
+            </footer>
           </div>
         </main>
       </div>

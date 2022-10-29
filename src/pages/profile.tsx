@@ -77,26 +77,28 @@ const Profile: NextPageWithLayout = () => {
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-3">
-            <div className="flex flex-col items-center justify-around bg-slate-700 p-5 border-r-2 border-gray-600">
-                <div className="relative p-5 rounded-full overflow-hidden">
-                    <Image
-                        src={formData.avatar ? formData.avatar : '/images/one.png'}
-                        width={400}
-                        height={400}
-                        object-fit="contain"
-                        className="rounded-full"
-                        priority
-                    />
-                    <label htmlFor="fileUpload" className="absolute top-3/4 right-10 hover:cursor-pointer">
-                        <i className="fas fa-camera"></i>
-                    </label>
-                    <input
-                        type="file"
-                        id="fileUpload"
-                        className="sr-only"
-                        onChange={onAvatarChange}
-                    />
+            <div className="flex flex-col items-center justify-around bg-slate-700 p-5 border-r-2 border-gray-600 gap-8">
+                <div className="relative border-2 border-gray-600">
+                    <div className="p-5 rounded-full overflow-hidden">
+                        <Image
+                            src={formData.avatar ? formData.avatar : '/images/one.png'}
+                            width={400}
+                            height={400}
+                            object-fit="contain"
+                            className="rounded-full"
+                            priority
+                        />
+                        <label htmlFor="fileUpload" className="absolute bottom-5 right-5 hover:cursor-pointer">
+                            <i className="fas fa-camera text-xl"></i>
+                        </label>
+                        <input
+                            type="file"
+                            id="fileUpload"
+                            className="sr-only"
+                            onChange={onAvatarChange}
+                        />
 
+                    </div>
                 </div>
                 <div>
                     <InputField
@@ -141,6 +143,7 @@ const Profile: NextPageWithLayout = () => {
                         />
                         <div className="relative">
                             <Select
+                                id="gender"
                                 options={enumHelper.gender}
                                 value={getEnumItem(enumHelper.gender, formData.job_seeker_profile.gender || 1)}
                                 onChange={(e: any) => setFormData({ ...formData, job_seeker_profile: { ...formData.job_seeker_profile, gender: e.value } })}
