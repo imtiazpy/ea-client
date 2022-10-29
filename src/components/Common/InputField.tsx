@@ -32,7 +32,7 @@ const InputField: React.FC<IInputField> = ({
         <FormError formError={gContext.validationError} name={name} />
       )}
 
-      <div className="relative mb-8">
+      <div className="relative">
         <input
           type={type}
           name={name}
@@ -46,7 +46,7 @@ const InputField: React.FC<IInputField> = ({
 
         <label
           htmlFor={id}
-          className="absolute bg-white px-4 rounded-sm left-0 -top-3.5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
+          className="absolute bg-white px-4 rounded-sm left-0 -top-4 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-4 peer-focus:text-gray-600 peer-focus:text-sm"
         >
           {label}
         </label>

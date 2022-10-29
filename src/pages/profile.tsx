@@ -33,7 +33,7 @@ const Profile: NextPageWithLayout = () => {
             let form_data = new FormData();
             form_data.append('avatar', e.target.files[0], e.target.files[0].name);
             api.uploadAvatar(form_data).then((response: any) => {
-                setFormData({...formData, avatar: response.avatar});
+                setFormData({ ...formData, avatar: response.avatar });
                 toast("Avatar Upload Successful!")
             }).catch(err => {
                 //
@@ -42,7 +42,7 @@ const Profile: NextPageWithLayout = () => {
     };
 
     const handleProfileUpdate = () => {
-        api.updateJSProfile({...formData, avatar: undefined, job_seeker_profile:{...formData.job_seeker_profile, date_of_birth: startDate.toISOString().split('T')[0]}}).then((response)=>{
+        api.updateJSProfile({ ...formData, avatar: undefined, job_seeker_profile: { ...formData.job_seeker_profile, date_of_birth: startDate.toISOString().split('T')[0] } }).then((response) => {
             toast.success("Profile updated");
             gContext.setValidationError(null);
 
@@ -53,12 +53,12 @@ const Profile: NextPageWithLayout = () => {
     };
 
     const handleChange = (e: any) => {
-        setFormData({...formData, [e.target.name]: e.target.value})
+        setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
     const handleProfileChange = (e: any) => {
         setFormData({
-            ...formData, 
+            ...formData,
             job_seeker_profile: {
                 ...formData.job_seeker_profile, [e.target.name]: e.target.value
             }
@@ -73,13 +73,13 @@ const Profile: NextPageWithLayout = () => {
         }).catch((err: any) => {
             //
         })
-    },[])
+    }, [])
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="flex flex-col items-center justify-around bg-slate-700 p-5">
+        <div className="grid grid-cols-1 md:grid-cols-3">
+            <div className="flex flex-col items-center justify-around bg-slate-700 p-5 border-r-2 border-gray-600">
                 <div className="relative p-5 rounded-full overflow-hidden">
-                    <Image 
+                    <Image
                         src={formData.avatar ? formData.avatar : '/images/one.png'}
                         width={400}
                         height={400}
@@ -90,16 +90,16 @@ const Profile: NextPageWithLayout = () => {
                     <label htmlFor="fileUpload" className="absolute top-3/4 right-10 hover:cursor-pointer">
                         <i className="fas fa-camera"></i>
                     </label>
-                    <input 
-                        type="file" 
-                        id="fileUpload" 
+                    <input
+                        type="file"
+                        id="fileUpload"
                         className="sr-only"
                         onChange={onAvatarChange}
                     />
-                    
+
                 </div>
                 <div>
-                    <InputField 
+                    <InputField
                         label="Name"
                         type="text"
                         name="name"
@@ -118,7 +118,7 @@ const Profile: NextPageWithLayout = () => {
                         <label
                             htmlFor="summary"
                             className="absolute bg-white px-4 rounded-sm left-0 -top-3.5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
-                            >
+                        >
                             Your Career Summary
                         </label>
                         <textarea
@@ -133,17 +133,17 @@ const Profile: NextPageWithLayout = () => {
                         ></textarea>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                        <DateTimeField 
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <DateTimeField
                             startDate={startDate}
                             setStartDate={setStartDate}
                             placeholderText="When is your birthday"
                         />
                         <div className="relative">
-                            <Select 
+                            <Select
                                 options={enumHelper.gender}
                                 value={getEnumItem(enumHelper.gender, formData.job_seeker_profile.gender || 1)}
-                                onChange={(e: any) => setFormData({...formData, job_seeker_profile:{...formData.job_seeker_profile, gender: e.value }})}
+                                onChange={(e: any) => setFormData({ ...formData, job_seeker_profile: { ...formData.job_seeker_profile, gender: e.value } })}
                             />
                             <label
                                 className="absolute bg-white px-4 rounded-sm left-0 -top-3.5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
@@ -152,8 +152,8 @@ const Profile: NextPageWithLayout = () => {
                             </label>
                         </div>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                        <InputField 
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <InputField
                             label="City"
                             type="text"
                             name="city"
@@ -163,7 +163,7 @@ const Profile: NextPageWithLayout = () => {
                             defaultValue={formData?.job_seeker_profile?.city}
                             onChange={handleProfileChange}
                         />
-                        <InputField 
+                        <InputField
                             label="Country"
                             type="text"
                             name="country"
@@ -183,10 +183,6 @@ const Profile: NextPageWithLayout = () => {
                         </button>
                     </div>
                 </div>
-            </div>
-
-            <div>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse facere tempora deserunt, iusto quos dolorem! Numquam molestiae libero facere, qui veniam voluptas nemo ut a eaque ducimus non commodi animi aperiam nihil ea? Nihil dolorem soluta ipsa iste, voluptates eveniet iusto odio itaque, perferendis iure cum at dicta incidunt animi voluptatem quidem vitae magni fugit provident blanditiis saepe corrupti! Hic quas facere molestias esse! Expedita repudiandae sint hic sed, culpa consectetur, dolor natus consequatur architecto itaque earum! Totam sapiente quaerat temporibus doloribus quo culpa, ullam deleniti, possimus praesentium, recusandae repudiandae tempora? Tempora vel laborum, nesciunt vero quis fugit eaque. Tempore a reiciendis, maxime odit voluptas magnam tenetur amet quo perferendis error facilis ipsa laboriosam quibusdam sint doloremque assumenda magni molestiae doloribus non vitae in animi alias laudantium dolores. Neque quisquam laboriosam iusto corporis? Maxime voluptates doloremque inventore alias magni in enim magnam. Libero porro expedita perferendis, iure recusandae repudiandae quisquam debitis cupiditate quia praesentium? Quam voluptatum laborum dolor quaerat, porro quisquam nostrum excepturi doloribus temporibus nihil illum aut at animi quod possimus iure, amet voluptas facilis eligendi autem necessitatibus! Vel commodi sit minima! Distinctio maxime temporibus porro eos quod placeat, enim modi ratione nihil laudantium voluptatem amet mollitia! Fugit, minus.
             </div>
         </div>
     );

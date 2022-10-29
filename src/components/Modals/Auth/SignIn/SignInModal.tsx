@@ -5,7 +5,7 @@ import { PasswordField, InputField } from '../../../Common';
 import { Fragment, useContext, useState } from 'react';
 import { useApiHelper } from '../../../../utility';
 
-export interface ISignInModal extends React.ComponentPropsWithoutRef<'div'> {}
+export interface ISignInModal extends React.ComponentPropsWithoutRef<'div'> { }
 
 const SignInModal: React.FC<ISignInModal> = ({ className, ...divProps }) => {
   const { signInModalShow, toggleSignInModal, toggleSignUpModal } =
@@ -72,7 +72,7 @@ const SignInModal: React.FC<ISignInModal> = ({ className, ...divProps }) => {
                             Sing In
                           </Dialog.Title>
                           <form
-                            className="space-y-4 md:space-y-6 text-left"
+                            className="space-y-4 md:space-y-8 text-left"
                             action="/"
                             onSubmit={(e) => handleSubmit(e)}
                           >

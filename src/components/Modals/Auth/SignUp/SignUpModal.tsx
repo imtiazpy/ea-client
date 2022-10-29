@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import AuthContext from '../../../../context/Auth/AuthContext';
 import { toast } from 'react-toastify';
 
-export interface ISignUpModal extends React.ComponentPropsWithoutRef<'div'> {}
+export interface ISignUpModal extends React.ComponentPropsWithoutRef<'div'> { }
 
 export interface IFormData {
   name: string;
@@ -94,7 +94,7 @@ const SignUpModal: React.FC<ISignUpModal> = ({ className, ...divProps }) => {
                           </Dialog.Title>
 
                           <form
-                            className="space-y-4 md:space-y-6 text-left"
+                            className="space-y-4 md:space-y-8 text-left"
                             action="/"
                             onSubmit={(e) => handleSubmit(e)}
                           >

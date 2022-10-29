@@ -1,10 +1,11 @@
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { CustomLink, DropDownMenu } from '../../Common';
 import { JobSeekerMenuItems } from './SideMenuItems';
 import AuthButton from '../../Buttons/Auth/AuthButton';
+import AuthContext from 'src/context/Auth/AuthContext';
 
 const Sidebar = () => {
   const [toggleCollapse, setToggleCollapse] = useState(false);
@@ -31,6 +32,7 @@ const Sidebar = () => {
   };
 
   const router = useRouter();
+  const gContext = useContext(AuthContext);
 
   return (
     <nav
@@ -78,9 +80,8 @@ const Sidebar = () => {
               key={id}
               to={`/${name}`}
               scroll={false}
-              className={`${
-                router.pathname == `/${name}` ? 'text-blue-600' : 'text-black'
-              } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2`}
+              className={`${router.pathname == `/${name}` ? 'text-blue-600' : 'text-black'
+                } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2`}
             >
               <i className={`fas ${icon}`}></i>
               {!toggleCollapse && label}
@@ -98,12 +99,12 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
-      
+
       {/* sidebar footer */}
       <div>
-      <hr className="my-4 md:min-w-full" />
+        <hr className="my-4 md:min-w-full" />
         {toggleCollapse && (
-          <i className="fas fa-sign-out-alt cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2"></i>
+          <i className="fas fa-sign-out-alt cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2" onClick={gContext.logout}></i>
         )}
         {!toggleCollapse && <AuthButton />}
       </div>
