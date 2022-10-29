@@ -1,7 +1,6 @@
 import { NextPageWithLayout } from './page';
 import SidebarLayout from '../components/Layouts/sidebar/SidebarLayout';
 
-export interface IDashboard extends React.ComponentPropsWithoutRef<'div'> {}
 
 const Dashboard: NextPageWithLayout = () => {
   return (
@@ -18,8 +17,6 @@ const Dashboard: NextPageWithLayout = () => {
 };
 
 export default Dashboard;
-
-// TODO: we will use a different layout for the dashboard, not the PrimaryLayout
 
 Dashboard.getLayout = (page) => {
   return <SidebarLayout>{page}</SidebarLayout>;

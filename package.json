@@ -26,8 +26,10 @@
     "js-cookie": "^3.0.1",
     "next": "12.3.1",
     "react": "18.2.0",
+    "react-datepicker": "^4.8.0",
     "react-dom": "18.2.0",
     "react-scroll": "^1.8.7",
+    "react-select": "^5.5.7",
     "react-toastify": "^9.0.8",
     "util": "^0.12.4"
   },

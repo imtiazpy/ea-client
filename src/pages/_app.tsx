@@ -9,6 +9,8 @@ import { NextPageWithLayout } from './page';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import "react-datepicker/dist/react-datepicker.css";
+
 interface AppPropsWithLayout extends AppProps {
   Component: NextPageWithLayout;
 }

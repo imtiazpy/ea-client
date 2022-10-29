@@ -11,6 +11,7 @@ export interface IAuthContext {
   isEmployer: false | true;
   isJobSeeker: false | true;
   validationError: any;
+  setValidationError: any;
   logout: () => void;
   handleSignUpSuccess: () => any;
   validationErrorCB: (error: object) => any;
@@ -22,6 +23,7 @@ const defaultValue: IAuthContext = {
   isEmployer: false,
   isJobSeeker: false,
   validationError: null,
+  setValidationError: null,
   logout: () => undefined,
   handleSignUpSuccess: () => undefined,
   validationErrorCB: () => undefined,
@@ -113,6 +115,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
         isEmployer,
         isJobSeeker,
         validationError,
+        setValidationError,
         logout,
         handleSignUpSuccess,
         validationErrorCB,
