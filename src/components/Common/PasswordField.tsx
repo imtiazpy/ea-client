@@ -30,7 +30,7 @@ const PasswordField: React.FC<IPasswordField> = ({
       {gContext.validationError && (
         <FormError formError={gContext.validationError} name={name} />
       )}
-      <div className="relative mb-8">
+      <div className="relative">
         <input
           {...inputProps}
           className="w-full h-10 text-gray-900 placeholder-transparent border-b-2 border-gray-300 peer focus:outline-none focus:border-blue-600"

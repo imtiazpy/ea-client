@@ -1,4 +1,5 @@
-import { createContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
+import AuthContext from '../Auth/AuthContext';
 
 export interface IModalsContext {
   signUpModalShow: true | false;
@@ -25,11 +26,15 @@ export const ModalsProvider: React.FC<any> = ({ children }) => {
     defaultValue.signInModalShow
   );
 
+  const { setValidationError } = useContext(AuthContext);
+
   const toggleSignUpModal = () => {
+    setValidationError(null)
     setSignUpModalShow(!signUpModalShow);
   };
 
   const toggleSignInModal = () => {
+    setValidationError(null)
     setSignInModalShow(!signInModalShow);
   };
 

@@ -72,7 +72,7 @@ const SignInModal: React.FC<ISignInModal> = ({ className, ...divProps }) => {
                             Sing In
                           </Dialog.Title>
                           <form
-                            className="space-y-4 md:space-y-8 text-left"
+                            className="grid grid-cols-1 gap-5 text-left"
                             action="/"
                             onSubmit={(e) => handleSubmit(e)}
                           >
