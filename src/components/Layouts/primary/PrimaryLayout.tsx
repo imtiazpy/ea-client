@@ -22,7 +22,7 @@ const PrimaryLayout: React.FC<IPrimaryLayout> = ({ children, ...divProps }) => {
         <SignInModal />
       </ModalsProvider>
 
-      <main className="md:container">{children}</main>
+      <main className="md:container flex-grow">{children}</main>
 
       <Footer />
     </>

@@ -28,9 +28,7 @@ const SidebarLayout: React.FC<ISidebarLayout> = ({
               </div>
             </div>
             <div>{children}</div>
-            <footer>
-              <Footer />
-            </footer>
+
           </div>
         </main>
       </div>

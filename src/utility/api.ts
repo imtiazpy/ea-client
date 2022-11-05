@@ -17,6 +17,14 @@ const useApiHelper = () => {
     // Jobseeker Profile
     getJSProfile: (params={}) => axios.get(`job-seekers/profile/`, {params: params}),
     updateJSProfile: (data: any, params = {}) => axios.patch(`job-seekers/profile/`, data, {params: params}),
+
+    //Employer Profile
+
+
+    //Assessments
+    getAssessments: (params={}) => axios.get(`assessment/assessments/`, {params: params}),
+    getPublicAssessments: (params={}) => axios.get(`assessment/public-assessments/`, {params: params}),
+
   };
 
   return api;
