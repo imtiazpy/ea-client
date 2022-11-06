@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import AuthContext from '../../../../context/Auth/AuthContext';
 import { toast } from 'react-toastify';
 
-export interface ISignUpModal extends React.ComponentPropsWithoutRef<'div'> { }
+export interface ISignUpModal extends React.ComponentPropsWithoutRef<'div'> {}
 
 export interface IFormData {
   name: string;

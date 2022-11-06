@@ -29,12 +29,12 @@ export const ModalsProvider: React.FC<any> = ({ children }) => {
   const { setValidationError } = useContext(AuthContext);
 
   const toggleSignUpModal = () => {
-    setValidationError(null)
+    setValidationError(null);
     setSignUpModalShow(!signUpModalShow);
   };
 
   const toggleSignInModal = () => {
-    setValidationError(null)
+    setValidationError(null);
     setSignInModalShow(!signInModalShow);
   };
 

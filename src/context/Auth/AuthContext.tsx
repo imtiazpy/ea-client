@@ -54,6 +54,8 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     localStorage.clear();
     deleteAllCookies();
     setAuthenticated(false);
+    setIsJobSeeker(false);
+    setIsEmployer(false);
     router.push('/');
     toast.success("You're logged out");
   };
@@ -73,6 +75,11 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
         .userType()
         .then((res: any) => {
           Cookies.set('userType', res.type);
+          if (res.type === CoreConstraint.JOB_SEEKER) {
+            setIsJobSeeker(true);
+          } else if (res.type === CoreConstraint.EMPLOYER) {
+            setIsEmployer(true);
+          }
         })
         .catch((err) => {
           toast.error('User not found!');

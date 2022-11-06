@@ -1,10 +1,9 @@
 import { NextPageWithLayout } from './page';
 import SidebarLayout from '../components/Layouts/sidebar/SidebarLayout';
 
-
 const Dashboard: NextPageWithLayout = () => {
   return (
-    <div className='bg-slate-600 p-5'>
+    <div className="bg-slate-600 p-5">
       Hello from the Dashboard Lorem ipsum dolor sit amet consectetur
       adipisicing elit. Fuga ut accusantium nam tempora quia natus! Deleniti
       aliquid cupiditate, hic esse magnam voluptatum ab voluptate, harum ea

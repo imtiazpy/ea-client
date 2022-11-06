@@ -7,8 +7,4 @@ export const MenuItems = [
     name: 'news',
     label: "What's new?",
   },
-  {
-    name: 'assessment',
-    label: 'Assessment',
-  },
 ];
