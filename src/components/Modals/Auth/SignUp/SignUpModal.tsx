@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import AuthContext from '../../../../context/Auth/AuthContext';
 import { toast } from 'react-toastify';
 
-export interface ISignUpModal extends React.ComponentPropsWithoutRef<'div'> {}
+export interface ISignUpModal extends React.ComponentPropsWithoutRef<'div'> { }
 
 export interface IFormData {
   name: string;
@@ -39,19 +39,15 @@ const SignUpModal: React.FC<ISignUpModal> = ({ className, ...divProps }) => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    if (formData.password === formData.re_password) {
-      api
-        .signUp({ ...formData })
-        .then((response) => {
-          gContext.handleSignUpSuccess();
-          toggleSignUpModal();
-        })
-        .catch((err) => {
-          gContext.validationErrorCB(err);
-        });
-    } else {
-      setErrorData("Password Didn't match");
-    }
+    api
+      .signUp({ ...formData })
+      .then((response) => {
+        gContext.handleSignUpSuccess();
+        toggleSignUpModal();
+      })
+      .catch((err) => {
+        gContext.validationErrorCB(err);
+      });
   };
 
   return (

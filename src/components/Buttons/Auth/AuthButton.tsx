@@ -21,7 +21,7 @@ const AuthButton: React.FC<IAuthButton> = ({
       {authenticated ? (
         <i className="fas fa-sign-out-alt text-center">&nbsp;Sign Out</i>
       ) : (
-        <i className="fas fa-sign-in-alt text-center">&nbsp;Sing In</i>
+        <i className="fas fa-sign-in-alt text-center">&nbsp;Sign In</i>
       )}
     </button>
   );
