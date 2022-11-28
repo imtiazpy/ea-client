@@ -7,7 +7,7 @@ import ModalsContext from '../../../context/Modals/ModalsContext';
 import AuthContext from '../../../context/Auth/AuthContext';
 import AuthButton from '../../Buttons/Auth/AuthButton';
 
-export interface IHeader extends React.ComponentPropsWithoutRef<'header'> {}
+export interface IHeader extends React.ComponentPropsWithoutRef<'header'> { }
 
 const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -38,11 +38,10 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                         key={index}
                         to={`/${name}`}
                         scroll={false}
-                        className={`${
-                          router.pathname == `/${name}`
+                        className={`${router.pathname == `/${name}`
                             ? 'text-blue-600'
                             : 'text-black'
-                        } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
+                          } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
                       >
                         {label}
                       </CustomLink>
@@ -52,13 +51,12 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                       <CustomLink
                         to="/assessment"
                         scroll={false}
-                        className={`${
-                          router.pathname == `/assessment`
+                        className={`${router.pathname == `/assessments`
                             ? 'text-blue-600'
                             : 'text-black'
-                        } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
+                          } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
                       >
-                        Assessment
+                        Assessments
                       </CustomLink>
                     )}
 
@@ -66,11 +64,10 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                       <CustomLink
                         to="/dashboard"
                         scroll={false}
-                        className={`${
-                          router.pathname == `/dashboard`
+                        className={`${router.pathname == `/dashboard`
                             ? 'text-blue-600'
                             : 'text-black'
-                        } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
+                          } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
                       >
                         Dashboard
                       </CustomLink>
@@ -82,7 +79,7 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                     />
                     <AuthButton
                       signIn={toggleSignInModal}
-                      // signOut is handled inside the component
+                    // signOut is handled inside the component
                     />
                   </div>
                 </div>
@@ -126,11 +123,10 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                       key={index}
                       to={`/${name}`}
                       scroll={false}
-                      className={`${
-                        router.pathname == `/${name}`
+                      className={`${router.pathname == `/${name}`
                           ? 'text-blue-500'
                           : 'text-black'
-                      } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
+                        } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
                     >
                       {label}
                     </CustomLink>
@@ -140,13 +136,12 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                     <CustomLink
                       to="/assessment"
                       scroll={false}
-                      className={`${
-                        router.pathname == `/assessment`
+                      className={`${router.pathname == `/assessments`
                           ? 'text-blue-600'
                           : 'text-black'
-                      } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
+                        } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
                     >
-                      Assessment
+                      Assessments
                     </CustomLink>
                   )}
 
@@ -154,11 +149,10 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                     <CustomLink
                       to="/dashboard"
                       scroll={false}
-                      className={`${
-                        router.pathname == `/dashboard`
+                      className={`${router.pathname == `/dashboard`
                           ? 'text-blue-600'
                           : 'text-black'
-                      } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
+                        } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
                     >
                       Dashboard
                     </CustomLink>
@@ -171,7 +165,7 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
 
                   <AuthButton
                     signIn={toggleSignInModal}
-                    // signOut is handled inside the component
+                  // signOut is handled inside the component
                   />
                 </div>
               </div>
