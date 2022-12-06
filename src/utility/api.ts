@@ -24,10 +24,11 @@ const useApiHelper = () => {
     //Employer Profile
 
     //Assessments
+    createAssessment: (data: any, params = {}) => axios.post(`assessment/`, data, {params: params}),
     getAssessments: (params = {}) =>
       axios.get(`assessment/assessments/`, { params: params }),
     getPublicAssessments: (params = {}) =>
-      axios.get(`assessment/public-assessments/`, { params: params }),
+      axios.get(`assessment/public/`, { params: params }),
   };
 
   return api;
