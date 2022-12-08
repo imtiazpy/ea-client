@@ -1,9 +1,12 @@
+import { useEffect } from 'react';
 import StartBtn from 'src/components/Buttons/StartBtn';
+import CustomLink from '../Link';
 
 export interface IAssessmentCard extends React.ComponentPropsWithoutRef<'div'> {
   title: string;
   type: string;
   duration: string;
+  id: string;
   created_by: Number;
 }
 
@@ -12,6 +15,7 @@ const AssessmentCard: React.FC<IAssessmentCard> = ({
   title,
   type,
   duration,
+  id,
   created_by,
   ...divProps
 }) => {
@@ -30,7 +34,13 @@ const AssessmentCard: React.FC<IAssessmentCard> = ({
         </p>
       </div>
       <div>
-        <StartBtn />
+        {/* <StartBtn /> */}
+        <CustomLink
+          to={`assessment/public/${id}`}
+          scroll={false}
+        >
+          Take the test
+        </CustomLink>
       </div>
     </div>
   );
