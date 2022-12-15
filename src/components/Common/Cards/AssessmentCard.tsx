@@ -6,7 +6,7 @@ export interface IAssessmentCard extends React.ComponentPropsWithoutRef<'div'> {
   title: string;
   type: string;
   duration: string;
-  id: string;
+  slug: string;
   created_by: Number;
 }
 
@@ -15,7 +15,7 @@ const AssessmentCard: React.FC<IAssessmentCard> = ({
   title,
   type,
   duration,
-  id,
+  slug,
   created_by,
   ...divProps
 }) => {
@@ -36,7 +36,7 @@ const AssessmentCard: React.FC<IAssessmentCard> = ({
       <div>
         {/* <StartBtn /> */}
         <CustomLink
-          to={`assessment/public/${id}`}
+          to={`assessment/public/${slug}`}
           scroll={false}
         >
           Take the test

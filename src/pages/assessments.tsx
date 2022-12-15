@@ -42,7 +42,7 @@ const Assessments: NextPageWithLayout = () => {
             title={item.title}
             type={item.type}
             duration={item.duration}
-            id={item.id}
+            slug={item.slug}
             created_by={item.created_by}
           />
         ))}
