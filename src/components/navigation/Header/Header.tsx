@@ -39,8 +39,8 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                         to={`/${name}`}
                         scroll={false}
                         className={`${router.pathname == `/${name}`
-                            ? 'text-blue-600'
-                            : 'text-black'
+                          ? 'text-blue-600'
+                          : 'text-black'
                           } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
                       >
                         {label}
@@ -49,11 +49,11 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
 
                     {gContext.isJobSeeker && (
                       <CustomLink
-                        to="/assessment"
+                        to="/assessments"
                         scroll={false}
                         className={`${router.pathname == `/assessments`
-                            ? 'text-blue-600'
-                            : 'text-black'
+                          ? 'text-blue-600'
+                          : 'text-black'
                           } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
                       >
                         Assessments
@@ -65,8 +65,8 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                         to="/dashboard"
                         scroll={false}
                         className={`${router.pathname == `/dashboard`
-                            ? 'text-blue-600'
-                            : 'text-black'
+                          ? 'text-blue-600'
+                          : 'text-black'
                           } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
                       >
                         Dashboard
@@ -124,8 +124,8 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                       to={`/${name}`}
                       scroll={false}
                       className={`${router.pathname == `/${name}`
-                          ? 'text-blue-500'
-                          : 'text-black'
+                        ? 'text-blue-500'
+                        : 'text-black'
                         } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
                     >
                       {label}
@@ -134,11 +134,11 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
 
                   {gContext.authenticated && (
                     <CustomLink
-                      to="/assessment"
+                      to="/assessments"
                       scroll={false}
                       className={`${router.pathname == `/assessments`
-                          ? 'text-blue-600'
-                          : 'text-black'
+                        ? 'text-blue-600'
+                        : 'text-black'
                         } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
                     >
                       Assessments
@@ -150,8 +150,8 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                       to="/dashboard"
                       scroll={false}
                       className={`${router.pathname == `/dashboard`
-                          ? 'text-blue-600'
-                          : 'text-black'
+                        ? 'text-blue-600'
+                        : 'text-black'
                         } cursor-pointer hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
                     >
                       Dashboard

@@ -29,6 +29,7 @@ const useApiHelper = () => {
       axios.get(`assessment/assessments/`, { params: params }),
     getPublicAssessments: (params = {}) =>
       axios.get(`assessment/public/`, { params: params }),
+    retrievePublicAssessment: (slug: any, params = {}) => axios.get(`assessment/public/${slug}`, {params: params}),
   };
 
   return api;

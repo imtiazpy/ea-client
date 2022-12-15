@@ -6,7 +6,7 @@ import { useApiHelper } from 'src/utility';
 import AssessmentCard from 'src/components/Common/Cards/AssessmentCard';
 import AuthContext from 'src/context/Auth/AuthContext';
 
-const Assessment: NextPageWithLayout = () => {
+const Assessments: NextPageWithLayout = () => {
   const [publicAssessment, setPublicAssessment] = useState([]);
 
   const api = useApiHelper();
@@ -42,6 +42,7 @@ const Assessment: NextPageWithLayout = () => {
             title={item.title}
             type={item.type}
             duration={item.duration}
+            slug={item.slug}
             created_by={item.created_by}
           />
         ))}
@@ -50,8 +51,8 @@ const Assessment: NextPageWithLayout = () => {
   );
 };
 
-export default Assessment;
+export default Assessments;
 
-Assessment.getLayout = (page) => {
+Assessments.getLayout = (page) => {
   return <PrimaryLayout>{page}</PrimaryLayout>;
 };
