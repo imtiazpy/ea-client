@@ -38,6 +38,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     deleteAllCookies();
     dispatch({ type: 'LOGOUT' })
     router.push('/');
+    router.reload()
     toast.success("You're logged out");
   };
 
