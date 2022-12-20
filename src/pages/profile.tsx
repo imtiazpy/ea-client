@@ -54,7 +54,7 @@ const Profile: NextPageWithLayout = () => {
       })
       .then((response) => {
         toast.success('Profile updated');
-        gContext.setValidationError(null);
+        gContext.dispatch({ type: 'ERROR', payload: null })
       })
       .catch((err) => {
         gContext.validationErrorCB(err.response.data.job_seeker_profile);

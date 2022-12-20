@@ -26,15 +26,15 @@ export const ModalsProvider: React.FC<any> = ({ children }) => {
     defaultValue.signInModalShow
   );
 
-  const { setValidationError } = useContext(AuthContext);
+  const { dispatch } = useContext(AuthContext)
 
   const toggleSignUpModal = () => {
-    setValidationError(null);
+    dispatch({ type: 'ERROR', payload: null })
     setSignUpModalShow(!signUpModalShow);
   };
 
   const toggleSignInModal = () => {
-    setValidationError(null);
+    dispatch({ type: 'ERROR', payload: null })
     setSignInModalShow(!signInModalShow);
   };
 

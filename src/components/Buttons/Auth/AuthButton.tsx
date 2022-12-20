@@ -10,15 +10,15 @@ const AuthButton: React.FC<IAuthButton> = ({
   signIn,
   ...buttonProps
 }) => {
-  const { authenticated, logout } = useContext(AuthContext);
+  const { state, logout } = useContext(AuthContext);
 
   return (
     <button
-      onClick={authenticated ? logout : signIn}
+      onClick={state.authenticated ? logout : signIn}
       className={`${className} cursor-pointer bg-blue-600 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-black`}
       {...buttonProps}
     >
-      {authenticated ? (
+      {state.authenticated ? (
         <i className="fas fa-sign-out-alt text-center">&nbsp;Sign Out</i>
       ) : (
         <i className="fas fa-sign-in-alt text-center">&nbsp;Sign In</i>
