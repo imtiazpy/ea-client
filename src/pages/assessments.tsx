@@ -25,12 +25,12 @@ const Assessments: NextPageWithLayout = () => {
 
   return (
     <>
-      {gContext.isJobSeeker && (
+      {gContext.state.isJobSeeker && (
         <h1 className="text-center text-2xl my-5">
           Try these public assessments
         </h1>
       )}
-      {gContext.isEmployer && (
+      {gContext.state.isEmployer && (
         <h1 className="text-center text-2xl my-5 bg-red-400 py-5">
           Sorry you can't access this
         </h1>

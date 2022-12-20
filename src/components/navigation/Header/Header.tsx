@@ -47,7 +47,7 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                       </CustomLink>
                     ))}
 
-                    {gContext.isJobSeeker && (
+                    {gContext.state.isJobSeeker && (
                       <CustomLink
                         to="/assessments"
                         scroll={false}
@@ -60,7 +60,7 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                       </CustomLink>
                     )}
 
-                    {gContext.authenticated && (
+                    {gContext.state.authenticated && (
                       <CustomLink
                         to="/dashboard"
                         scroll={false}
@@ -132,7 +132,7 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                     </CustomLink>
                   ))}
 
-                  {gContext.authenticated && (
+                  {gContext.state.authenticated && (
                     <CustomLink
                       to="/assessments"
                       scroll={false}
@@ -145,7 +145,7 @@ const Header: React.FC<IHeader> = ({ className, ...headerProps }) => {
                     </CustomLink>
                   )}
 
-                  {gContext.authenticated && (
+                  {gContext.state.authenticated && (
                     <CustomLink
                       to="/dashboard"
                       scroll={false}

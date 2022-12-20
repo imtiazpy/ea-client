@@ -28,8 +28,8 @@ const InputField: React.FC<IInputField> = ({
 
   return (
     <>
-      {gContext.validationError && (
-        <FormError formError={gContext.validationError} name={name} />
+      {gContext.state.validationError && (
+        <FormError formError={gContext.state.validationError} name={name} />
       )}
 
       <div className="relative">

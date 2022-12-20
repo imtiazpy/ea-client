@@ -1,29 +1,24 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState, useReducer } from 'react';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { deleteAllCookies } from '../../utility/';
 import { useApiHelper } from '../../utility';
 import CoreConstraint from '../../coreConstraint';
+import reducer from './AuthReducer';
 
 export interface IAuthContext {
-  authenticated: false | true;
-  isEmployer: false | true;
-  isJobSeeker: false | true;
-  validationError: any;
-  setValidationError: any;
-  logout: () => void;
+  state: any;
+  dispatch: any;
+  logout: () => any;
   handleSignUpSuccess: () => any;
   validationErrorCB: (error: object) => any;
   loginSuccessCB: (response: object) => any;
 }
 
 const defaultValue: IAuthContext = {
-  authenticated: false,
-  isEmployer: false,
-  isJobSeeker: false,
-  validationError: null,
-  setValidationError: null,
+  state: {},
+  dispatch: () => undefined,
   logout: () => undefined,
   handleSignUpSuccess: () => undefined,
   validationErrorCB: () => undefined,
@@ -33,19 +28,7 @@ const defaultValue: IAuthContext = {
 const AuthContext = createContext<IAuthContext>(defaultValue);
 
 export const AuthProvider: React.FC<any> = ({ children }) => {
-  const [authenticated, setAuthenticated] = useState(
-    defaultValue.authenticated
-  );
-  const [isEmployer, setIsEmployer] = useState<boolean>(
-    defaultValue.isEmployer
-  );
-  const [isJobSeeker, setIsJobSeeker] = useState<boolean>(
-    defaultValue.isJobSeeker
-  );
-
-  const [validationError, setValidationError] = useState(
-    defaultValue.validationError
-  );
+  const [state, dispatch] = useReducer(reducer, defaultValue)
 
   const router = useRouter();
   const api = useApiHelper();
@@ -53,22 +36,20 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
   const logout = () => {
     localStorage.clear();
     deleteAllCookies();
-    setAuthenticated(false);
-    setIsJobSeeker(false);
-    setIsEmployer(false);
+    dispatch({ type: 'LOGOUT' })
     router.push('/');
     toast.success("You're logged out");
   };
 
   // Error Callback Functions
   const validationErrorCB = (error: any) => {
-    setValidationError(error?.response?.data);
+    dispatch({ type: 'ERROR', payload: error?.response?.data })
   };
 
   const loginSuccessCB = (response: any) => {
     if (response?.access) {
       Cookies.set('accessToken', response.access);
-      setAuthenticated(true);
+      dispatch({ type: 'LOGIN_SUCCESS' })
 
       // Checking and setting the user type in cookies
       api
@@ -76,9 +57,9 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
         .then((res: any) => {
           Cookies.set('userType', res.type);
           if (res.type === CoreConstraint.JOB_SEEKER) {
-            setIsJobSeeker(true);
+            dispatch({ type: 'USER_TYPE_JOB_SEEKER' })
           } else if (res.type === CoreConstraint.EMPLOYER) {
-            setIsEmployer(true);
+            dispatch({ type: 'USER_TYPE_EMPLOYER' })
           }
         })
         .catch((err) => {
@@ -86,43 +67,41 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
         });
 
       toast.success('you are logged in');
-      setValidationError(null);
+
+      // don't uncomment this
       // router.push('/dashboard');
     }
   };
 
   const handleSignUpSuccess = () => {
     toast.success('your registration Done');
-    setValidationError(null);
+    dispatch({ type: 'SIGNUP_SUCCESS' })
     router.push('/activation');
   };
 
   useEffect(() => {
     // decide if authenticated or not
     if (Cookies.get('accessToken')) {
-      return setAuthenticated(true);
+      return dispatch({ type: 'CHECK_AUTH_STATUS', payload: true })
     } else {
-      return setAuthenticated(false);
+      return dispatch({ type: 'CHECK_AUTH_STATUS', payload: false })
     }
-  });
+  }, []);
 
   useEffect(() => {
     // check the user type
     if (Cookies.get('userType') === CoreConstraint.EMPLOYER) {
-      return setIsEmployer(true);
+      return dispatch({ type: 'USER_TYPE_EMPLOYER' })
     } else if (Cookies.get('userType') === CoreConstraint.JOB_SEEKER) {
-      return setIsJobSeeker(true);
+      return dispatch({ type: 'USER_TYPE_JOB_SEEKER' })
     }
-  });
+  }, []);
 
   return (
     <AuthContext.Provider
       value={{
-        authenticated,
-        isEmployer,
-        isJobSeeker,
-        validationError,
-        setValidationError,
+        state,
+        dispatch,
         logout,
         handleSignUpSuccess,
         validationErrorCB,
