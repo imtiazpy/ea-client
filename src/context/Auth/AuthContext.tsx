@@ -7,6 +7,7 @@ import { useApiHelper } from '../../utility';
 import CoreConstraint from '../../coreConstraint';
 import reducer from './AuthReducer';
 
+/* Defining the interface of the AuthContext. */
 export interface IAuthContext {
   state: any;
   dispatch: any;
@@ -16,6 +17,8 @@ export interface IAuthContext {
   loginSuccessCB: (response: object) => any;
 }
 
+
+/* The default value of the context. */
 const defaultValue: IAuthContext = {
   state: {},
   dispatch: () => undefined,
@@ -33,6 +36,10 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
   const router = useRouter();
   const api = useApiHelper();
 
+
+  /**
+   * It clears the localStorage, deletes all cookies, dispatches a logout action, redirects to the home page, and displays a toast message
+   */
   const logout = () => {
     localStorage.clear();
     deleteAllCookies();
@@ -42,17 +49,24 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     toast.success("You're logged out");
   };
 
+
   // Error Callback Functions
   const validationErrorCB = (error: any) => {
     dispatch({ type: 'ERROR', payload: error?.response?.data })
   };
 
+
+
+  /**
+   * A callback function that is called when the login is successful.
+   * @param {any} response - any - This is the response that we get from the API.
+   */
   const loginSuccessCB = (response: any) => {
     if (response?.access) {
       Cookies.set('accessToken', response.access);
       dispatch({ type: 'LOGIN_SUCCESS' })
 
-      // Checking and setting the user type in cookies
+      /* This is checking the user type and setting the user type in cookies. */
       api
         .userType()
         .then((res: any) => {
@@ -67,6 +81,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
           toast.error('User not found!');
         });
 
+
       toast.success('you are logged in');
 
       // don't uncomment this
@@ -74,12 +89,18 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     }
   };
 
+
+  /**
+   * A function that is called when the user successfully registers.
+   */
   const handleSignUpSuccess = () => {
     toast.success('your registration Done');
     dispatch({ type: 'SIGNUP_SUCCESS' })
     router.push('/activation');
   };
 
+
+  /* Checking if the user is authenticated or not. */
   useEffect(() => {
     // decide if authenticated or not
     if (Cookies.get('accessToken')) {
@@ -89,6 +110,8 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     }
   }, []);
 
+
+  /* Checking the user type and dispatching the action accordingly. */
   useEffect(() => {
     // check the user type
     if (Cookies.get('userType') === CoreConstraint.EMPLOYER) {

@@ -28,6 +28,9 @@ export const ModalsProvider: React.FC<any> = ({ children }) => {
 
   const { dispatch } = useContext(AuthContext)
 
+  /**
+   * The function toggles the sign up modal show state to the opposite of what it currently is
+   */
   const toggleSignUpModal = () => {
     dispatch({ type: 'ERROR', payload: null })
     setSignUpModalShow(!signUpModalShow);

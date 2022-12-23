@@ -6,6 +6,9 @@ import { toast } from 'react-toastify';
 export const NEXT_PUBLIC_APP_API_URL =
   process.env.NEXT_PUBLIC_APP_API_URL || 'http://127.0.0.1:8000/api/v1/';
 
+/**
+ * It deletes all cookies by iterating over all cookies and setting their expiration date to a date in the past
+ */
 export const deleteAllCookies = () => {
   document.cookie.split(';').forEach(function (c) {
     document.cookie = c
