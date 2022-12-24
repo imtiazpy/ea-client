@@ -102,7 +102,6 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
 
   /* Checking if the user is authenticated or not. */
   useEffect(() => {
-    // decide if authenticated or not
     if (Cookies.get('accessToken')) {
       return dispatch({ type: 'CHECK_AUTH_STATUS', payload: true })
     } else {
@@ -113,7 +112,6 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
 
   /* Checking the user type and dispatching the action accordingly. */
   useEffect(() => {
-    // check the user type
     if (Cookies.get('userType') === CoreConstraint.EMPLOYER) {
       return dispatch({ type: 'USER_TYPE_EMPLOYER' })
     } else if (Cookies.get('userType') === CoreConstraint.JOB_SEEKER) {
