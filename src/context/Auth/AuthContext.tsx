@@ -63,7 +63,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
    */
   const loginSuccessCB = (response: any) => {
     if (response?.access) {
-      Cookies.set('accessToken', response.access);
+      Cookies.set('accessToken', response.access, { secure: true });
       dispatch({ type: 'LOGIN_SUCCESS' })
 
       /* This is checking the user type and setting the user type in cookies. */
